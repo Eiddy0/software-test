@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo</title>
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<link rel="stylesheet" type="text/css" href="css/bootsnav.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
+	<style type="text/css">
+	.navbar-brand{
+		padding: 29px 15px;
+		height: auto;
+	}
+	nav.navbar.bootsnav{
+		border: none;
+	}
+	.navbar-nav{
+		float: left;
+	}
+	nav.navbar.bootsnav ul.nav > li > a{
+		color: #474747;
+		text-transform: uppercase;
+		padding: 25px 30px;
+	}
+	nav.navbar.bootsnav ul.nav > li:hover{
+		background: #f4f4f4;
+	}
+	.nav > li:after{
+		content: "";
+		width: 0;
+		height: 5px;
+		background: #34c9dd;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		transition: all 0.5s ease 0s;
+	}
+	.nav > li:hover:after{
+		width: 100%;
+	}
+	nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after{
+		content: "+";
+		font-family: 'FontAwesome';
+		font-size: 16px;
+		font-weight: 500;
+		position: absolute;
+		top: 35%;
+		right: 10%;
+		transition: all 0.4s ease 0s;
+	}
+	nav.navbar.bootsnav ul.nav > li.dropdown.on > a.dropdown-toggle:after{
+		content: "\f105";
+		transform: rotate(90deg);
+	}
+	.dropdown-menu.multi-dropdown{
+		position: absolute;
+		left: -100% !important;
+	}
+	nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		border: none;
+	}
+	@media only screen and (max-width:990px){
+		nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after,
+		nav.navbar.bootsnav ul.nav > li.dropdown.on > a.dropdown-toggle:after{ content: " "; }
+		.dropdown-menu.multi-dropdown{ left: 0 !important; }
+		nav.navbar.bootsnav ul.nav > li:hover{ background: transparent; }
+		nav.navbar.bootsnav ul.nav > li > a{ margin: 0; }
+	}
+</style>
+</head>
+<body>
+	<div class="htmleaf-container">
+		<!----head start-------------------------------->
+		<div class="container">
+			<div class="row">
+				<nav class="navbar navbar-default navbar-mobile bootsnav">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>
+
+					<div class="collapse navbar-collapse" id="navbar-menu">
+						<ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
+							<li class="dropdown"id="book">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">书籍信息管理</a>
+								<ul class="dropdown-menu">
+									<li id="inputbook"><a href="javascript:;">输入书籍信息</a></li>
+									<li id="findbook"><a href="javascript:;">查询书籍信息</a></li>
+									<li id="deletebook"><a href="javascript:;">删除书籍信息</a></li>
+									<li id="changebook"><a href="javascript:;">修改书籍信息</a></li>
+									<li id="allBook"><a href="javascript:;">所有书籍信息</a></li>
+									<li id="outputBook"><a href="javascript:;">书籍信息导出</a></li>
+									<li id="loadfileBook"><a href="javascript:;">书籍信息导入</a></li>
+									<input type="file"  onchange="loadFileBook(this.files[0])" id="bookData">
+									
+									
+								</ul>
+							</li>
+							<li class="dropdown"id="borrow">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">借阅信息管理</a>
+								<ul class="dropdown-menu">
+									<li id="inputbor"><a href="javascript:;">输入借阅信息</a></li>
+									<li id="findbor"><a href="javascript:;">查询借阅信息</a></li>
+									<li id="deletebor"><a href="javascript:;">删除借阅信息</a></li>
+									<li id="changebor"><a href="javascript:;">修改借阅信息</a></li>
+									<li id="allBor"><a href="javascript:;">所有借阅信息</a></li>
+									<li id="outputBor"><a href="javascript:;">借阅信息导出</a></li>
+									<li id="loadfileBor"><a href="javascript:;">借阅信息导入</a></li>
+									<input type="file"  onchange="loadFileBor(this.files[0])" id="borData">
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">报表</a>
+								<ul class="dropdown-menu">
+									<li class="dropdown">
+										<a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">图书信息报表</a>
+										<ul class="dropdown-menu">
+											<li id="BookReportup"><a href="javascript:;">编号升序</a></li>
+											<li id="BookReportdo"><a href="javascript:;">编号降序</a></li>
+										</ul>
+									</li>
+									<li class="dropdown">
+										<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">学生借阅报表</a>
+										<ul class="dropdown-menu">
+											<li id="BorReportup"><a href="javascript:;">学号升序</a></li>
+											<li id="BorReportdo"><a href="javascript:;">学号降序</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</li>
+							<!-- <li><a href="javascript:;">关于</a></li> -->
+							<li id="closesys"><a href="javascript:;">退出系统</a></li>
+						</ul>
+					</div>
+				</nav>
+				
+			</div>
+		</div>
+		<!----head end-------------------------------->
+		<div class="container bk" id="InformCont">
+		<!----------------------------显示内容-------------------------------->	
+		</div>
+		<!------------------------------------------------book start--------------------------------------------------->
+		<!----Addbook start-------------------------------->
+		<div class="container" id="AddBook">
+			<form action=""  method="post">
+				<div class="form-title-row">
+					<h1>添加书籍信息</h1>
+				</div>
+				<div>
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>编号</span>
+								<input type="number" name="booknum" class="Bnum required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>3)value=value.slice(0,3)"min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入编号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>书名</span>
+								<input type="text" name="bookname" class="Bname required" >
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书名</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>作者</span>
+								<input type="text" name="writername" class="Wname required" oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>录入时间</span>
+								<input type="date" name="inputtime" class="Itime required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入录入时间 </span>
+						<div class="form-row">
+							<label class="lab">
+								<span>录入人员姓名</span>
+								<input type="text" name="inputname" class="Iname required" style="width: 202px!important;"oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>录入人员编号</span>
+								<input type="number" name="inputnum" class="Inum required" style="width: 202px!important;" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>4)value=value.slice(0,4)" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入录入人员编号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>出版社</span>
+								<input type="text" name="publishname" class="Pname" style="width: 244px!important;"oninput="if(value.length>30)value=value.slice(0,30)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入出版社 </span>
+						<div class="form-row">
+							<label class="lab">
+								<span>出版时间</span>
+								<input type="date" name="publishtime" class="Ptime" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">出版时间不合理</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>页数</span>
+								<input type="number" name="page" class="page required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入页数</span>
+					</div>
+
+					<div style="display: inline;">
+						<input type="button" value="添加" id="btnbook-add">
+						<input type="button" value="关闭" class="btn-close">
+					</div>
+				</div>	
+			</form>
+		</div>
+		<!----AddBook end-------------------------------->
+		<!----FindBook start-------------------------------->
+		<div class="container" id="FindBook">
+			<form action=""  method="post" target="frameName">
+				<div class="form-title-row">
+					<h1>查找书籍信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>书名</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>输入编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>输入书名</span>
+						<input type="text" name="inputName" class="inputName" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="查询" id="btnbook-find">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName"></iframe>
+
+		</div>
+		<!----FindBook end-------------------------------->
+		<!----DeleteBook start-------------------------------->
+		<div class="container" id="DeleteBook">
+			<form action=""  method="post" target="frameName">
+				<div class="form-title-row">
+					<h1>删除书籍信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>书名</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>输入编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>输入书名</span>
+						<input type="text" name="inputName" class="inputName" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="删除" id="btnbook-delete">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName"></iframe>
+		</div>
+		<!----DeleteBook end-------------------------------->
+		<!----ChangeBook start-------------------------------->
+		<div class="container" id="ChangeBook">
+			<form action=""  method="post" target="frameName" class="chg">
+				<div class="form-title-row">
+					<h1>修改书籍信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>书名</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>输入编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>输入书名</span>
+						<input type="text" name="inputName" class="inputName" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="确定" id="btn-change1">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName" ></iframe>
+
+			<form action=""  method="post" id="changebook-form">
+				<div class="form-title-row">
+					<h1>修改书籍信息</h1>
+				</div>
+				<div>
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>编号</span>
+								<input type="number" name="booknum" class="Bnum required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>3)value=value.slice(0,3)"min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">编号已存在</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>书名</span>
+								<input type="text" name="bookname" class="Bname required" >
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书名</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>作者</span>
+								<input type="text" name="writername" class="Wname required" oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>录入时间</span>
+								<input type="date" name="inputtime" class="Itime required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请选择录入时间 </span>
+						<div class="form-row">
+							<label class="lab">
+								<span>录入人员姓名</span>
+								<input type="text" name="inputname" class="Iname required" style="width: 202px!important;"oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>录入人员编号</span>
+								<input type="number" name="inputnum" class="Inum required" style="width: 202px!important;"onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>4)value=value.slice(0,4)"min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入录入人员编号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>出版社</span>
+								<input type="text" name="publishname" class="Pname" style="width: 244px!important;"oninput="if(value.length>30)value=value.slice(0,30)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">11 </span>
+						<div class="form-row">
+							<label class="lab">
+								<span>出版时间</span>
+								<input type="date" name="publishtime" class="Ptime " style="width: 231px!important;">
+							</label>
+						</div>
+						<span style="opacity: 0;">出版时间不合理</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>页数</span>
+								<input type="number" name="page required" class="page required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入页数</span>
+					</div>
+
+					<div style="display: inline;">
+						<input type="button" value="修改" id="btn-change2">
+						<input type="button" value="关闭" class="btn-close">
+					</div>
+				</div>	
+			</form>
+
+		</div>
+		<!----ChangeBook end-------------------------------->
+		<!------------------------------------------------book end--------------------------------------------------->
+		<!------------------------------------------------borrow start--------------------------------------------------->
+		<!----AddBor start-------------------------------->
+		<div class="container" id="AddBor">
+			<form action=""  method="post">
+				<div class="form-title-row">
+					<h1>添加借阅信息</h1>
+				</div>
+				<div>
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>学号</span>
+								<input type="number" name="snum" class="Snum required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>8)value=value.slice(0,8)"min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入学号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>姓名</span>
+								<input type="text" name="sname" class="Sname required" oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>班级</span>
+								<input type="text" name="sclass" class="Sclass required" oninput="if(value.length>30)value=value.slice(0,30)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~30个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>电话</span>
+								<input type="tel" name="stel" class="Stel required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>11)value=value.slice(0,11)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入11位电话号码</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>寝室楼号</span>
+								<input type="text" name="sroom" class="Sroom required" style="width: 231px!important;" oninput="if(value.length>5)value=value.slice(0,5)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入5位寝室楼号</span>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅书籍编号</span>
+								<input type="number" name="sbnum" class="Sbnum required" style="width: 202px!important;" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>3)value=value.slice(0,3)" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书籍编号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅书籍书名</span>
+								<input type="text" name="sbname" class="Sbname required" style="width: 202px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书名</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅时间</span>
+								<input type="date" name="sbbort" class="Sbbort required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;"> 请输入借阅时间</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>到期时间</span>
+								<input type="date" name="sbendt" class="Sbendt required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;"> 请输入到期时间</span>
+					</div>
+
+					<div style="display: inline;">
+						<input type="button" value="添加" id="btnbor-add">
+						<input type="button" value="关闭" class="btn-close">
+					</div>
+				</div>	
+			</form>
+		</div>
+		<!----AddBor end-------------------------------->
+		<!----FindBor start-------------------------------->
+		<div class="container" id="FindBor">
+			<form action=""  method="post" target="frameName">
+				<div class="form-title-row">
+					<h1>查找借阅信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>书籍编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>学生学号</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>书籍编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>学生学号</span>
+						<input type="text" name="inputSnum" class="inputSnum" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="查询" id="btnbor-find">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName"></iframe>
+
+		</div>
+		<!----FindBook end-------------------------------->
+		<!----DeleteBor start-------------------------------->
+		<div class="container" id="DeleteBor">
+			<form action=""  method="post" target="frameName">
+				<div class="form-title-row">
+					<h1>删除借阅信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>书籍编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>学生学号</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>输入编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>输入学号</span>
+						<input type="text" name="inputSnum" class="inputSnum" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="删除" id="btnbor-delete">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName"></iframe>
+		</div>
+		<!----DeleteBor end-------------------------------->
+		<!----ChangeBor start-------------------------------->
+		<div class="container" id="ChangeBor">
+			<form action=""  method="post" target="frameName" class="chg">
+				<div class="form-title-row">
+					<h1>修改借阅信息</h1>
+				</div>
+				<div class="form-row">
+					<label class="lab"><span>选择</span></label>
+					<div class="form-radio-buttons" >
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch1">
+								<span>书籍编号</span>
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="choose" class="ch2">
+								<span>学生学号</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row iNum">
+					<label class="lab">
+						<span>输入编号</span>
+						<input type="text" name="inputNum" class="inputNum" >
+					</label>
+				</div>
+				<div class="form-row iName">
+					<label class="lab">
+						<span>输入学号</span>
+						<input type="text" name="inputSnum" class="inputSnum" >
+					</label>
+				</div>
+				<div class="form-row">
+					<input type="button" value="确定" id="btn-change3">
+					<input type="button" value="关闭" class="btn-close">
+				</div>
+			</form>
+			<iframe src="" frameborder="0" name="frameName" ></iframe>
+
+			<form action=""  method="post" id="changebor-form">
+				<div class="form-title-row">
+					<h1>修改书籍信息</h1>
+				</div>
+				<div>
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>学号</span>
+								<input type="number" name="snum" class="Snum required"  onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>8)value=value.slice(0,8)" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入学号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>姓名</span>
+								<input type="text" name="sname" class="Sname required" oninput="if(value.length>20)value=value.slice(0,20)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~20个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>班级</span>
+								<input type="text" name="sclass" class="Sclass required" oninput="if(value.length>30)value=value.slice(0,30)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入1~30个字符</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>电话</span>
+								<input type="tel" name="stel" class="Stel required" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>11)value=value.slice(0,11)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入11位电话号码</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>寝室楼号</span>
+								<input type="text" name="sroom" class="Sroom required" style="width: 231px!important;"oninput="if(value.length>5)value=value.slice(0,5)">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入5位寝室楼号</span>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅书籍编号</span>
+								<input type="number" name="sbnum" class="Sbnum required" style="width: 202px!important;" onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" oninput="if(value.length>3)value=value.slice(0,3)" min='1'>
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书籍编号</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅书籍书名</span>
+								<input type="text" name="sbname" class="Sbname required" style="width: 202px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;">请输入书名</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>借阅时间</span>
+								<input type="date" name="sbbort" class="Sbbort required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;"> 请输入借阅时间</span>
+						<div class="form-row">
+							<label class="lab">
+								<span>到期时间</span>
+								<input type="date" name="sbendt" class="Sbendt required" style="width: 231px!important;">
+								<span></span>
+							</label>
+						</div>
+						<span style="opacity: 0;"> 请输入到期时间</span>
+					</div>
+					
+					<div style="display: inline;">
+						<input type="button" value="修改" id="btn-change4">
+						<input type="button" value="关闭" class="btn-close">
+					</div>
+				</div>	
+			</form>
+
+		</div>
+		<!----ChangeBor end-------------------------------->
+		<!------------------------------------------------borrow end--------------------------------------------------->
+		
+	</div>
+
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootsnav.js"></script>
+	<script type="text/javascript" src="js/FileSaver.js"></script>
+	<script type="text/javascript" src="js/myjs.js"></script>
+
+</body>
+<script>
+    function loadFileBook(file){
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+            var result = this.result;//文件内容
+            //确定，将文件保存到本地存储中，替换现有的
+            try {
+                localStorage.setItem("bookFilename", file.name);
+                localStorage.setItem("bookInfor", result);
+                $("#InformCont").empty();
+                $("#InformCont").prepend("书籍信息导入成功！");
+            }
+            catch (e) {
+                console.log("Storage failed: " + e);
+            }
+        };
+        fileReader.readAsText(file);
+    }
+    function loadFileBor(file){
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+            var result = this.result;//文件内容
+            //确定，将文件保存到本地存储中，替换现有的
+            try {
+                localStorage.setItem("borFilename", file.name);
+                localStorage.setItem("borInfor", result);
+                $("#InformCont").empty();
+                $("#InformCont").prepend("借阅信息导入成功！");
+            }
+            catch (e) {
+                console.log("Storage failed: " + e);
+            }
+        };
+        fileReader.readAsText(file);
+    }
+</script>
+</html>
